@@ -2,7 +2,6 @@ import { relations } from 'drizzle-orm';
 import { InferInsertModel, InferSelectModel } from 'drizzle-orm';
 import { pgTable, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
 import { createInsertSchema } from 'drizzle-zod';
-import {text} from "drizzle-orm/pg-core/index";
 
 export const exercise = pgTable('exercises', {
   id: uuid('id').defaultRandom().primaryKey(),
@@ -25,8 +24,8 @@ export const users = pgTable('users', {
   id: uuid('id').defaultRandom().primaryKey(),
   name: varchar('name', { length: 256 }).notNull(),
   email: varchar('email').notNull().unique(),
-  type: varchar('type', { length: 56 }).notNull(),
-  difficulty: varchar('difficulty', { length: 56 }).notNull(),
+  type: varchar('type', { length: 56 }).default('strength'),
+  difficulty: varchar('difficulty', { length: 56 }).default('beginner')
 });
 
 export const insertUserSchema = createInsertSchema(users);

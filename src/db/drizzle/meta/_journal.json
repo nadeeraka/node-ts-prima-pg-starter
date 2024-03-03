@@ -15,6 +15,13 @@
       "when": 1709448457799,
       "tag": "0001_late_piledriver",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1709459932762,
+      "tag": "0002_lazy_red_ghost",
+      "breakpoints": true
     }
   ]
 }

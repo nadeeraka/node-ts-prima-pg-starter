@@ -9,15 +9,12 @@ export async function createUser(
   res: Response,
 ): Promise<Response> {
   try {
-    const { name } = req.body;
+    const { name,email,type,difficulty } = req.body;
     
-    const newUser = insertUserSchema.parse({ name });
+    const newUser = insertUserSchema.parse({ name,email,type,difficulty });
     
-    const results: NewUser[] = await db
-      .insert(users)
-      .values(newUser)
-      .returning();
-    
+    const results: NewUser[] = await db.insert(users).values(newUser).returning();
+
     if (!results || results.length < 1) {
       return res.status(500).send({ message: 'User could not be created.' });
     }
@@ -35,18 +32,16 @@ export async function getUserPosts(
 ): Promise<Response> {
   try {
     const { id } = req.params;
-    
+
     const user = await db.query.users.findFirst({
       where: eq(users.id, id),
-      with: {
-        posts: true,
-      },
+
     });
-    
+
     if (!user) {
       return res.status(404).send({ message: 'User with that id not found' });
     }
-    
+
     return res.send(user);
   } catch (e) {
     console.log(e);

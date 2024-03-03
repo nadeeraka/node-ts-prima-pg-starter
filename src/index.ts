@@ -4,8 +4,9 @@ import morgan from 'morgan';
 import 'dotenv/config';
 
 // import { router as postsRouter } from './routes/posts';
-// import { router as usersRouter } from './routes/users';
+import { router as usersRouter } from './routes/users';
 import { router as statusRouter } from './routes/status';
+import {connect, db} from "./db";
 
 const app: Express = express();
 const port = process.env.PORT || 8080;
@@ -20,7 +21,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const API_PREFIX = '/api';
 // app.use(`${API_PREFIX}/posts`, postsRouter);
-// app.use(`${API_PREFIX}/users`, usersRouter);
+app.use(`${API_PREFIX}/users`, usersRouter);
 app.use(`/`, statusRouter);
 
 app.listen(port, () =>
