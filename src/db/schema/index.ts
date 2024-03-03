@@ -25,8 +25,8 @@ export const users = pgTable('users', {
   id: uuid('id').defaultRandom().primaryKey(),
   name: varchar('name', { length: 256 }).notNull(),
   email: varchar('email').notNull().unique(),
-  type: varchar('title', { length: 56 }).notNull(),
-  difficulty: varchar('title', { length: 56 }).notNull(),
+  type: varchar('type', { length: 56 }).notNull(),
+  difficulty: varchar('difficulty', { length: 56 }).notNull(),
 });
 
 export const insertUserSchema = createInsertSchema(users);
