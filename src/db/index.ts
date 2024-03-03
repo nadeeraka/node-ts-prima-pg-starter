@@ -1,8 +1,17 @@
-import { NodePgDatabase, drizzle } from 'drizzle-orm/node-postgres';
+import { PrismaClient } from "@prisma/client";
 
-import * as schema from './schema';
-import {neon} from "@neondatabase/serverless";
+export const prisma = new PrismaClient();
 
+async function main() {
+  // ... you will write your Prisma Client queries here
+}
 
-export const connect:any = neon(process.env.DRIZZLE_DATABASE_URL!);
-export const db: NodePgDatabase<typeof schema> = drizzle(connect, { schema });
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
