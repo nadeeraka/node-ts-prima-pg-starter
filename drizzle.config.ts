@@ -6,7 +6,7 @@ export default {
   out: './src/db/drizzle',
   driver: 'pg',
   dbCredentials: {
-    connectionString: String(process.env.DB_URL),
+    connectionString: String(process.env.DRIZZLE_DATABASE_URL),
   },
   verbose: true,
   strict: true,

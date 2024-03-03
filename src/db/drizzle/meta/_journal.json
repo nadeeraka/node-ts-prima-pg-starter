@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1709448196622,
+      "tag": "0000_long_felicia_hardy",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1709448457799,
+      "tag": "0001_late_piledriver",
+      "breakpoints": true
+    }
+  ]
+}

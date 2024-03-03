@@ -1,18 +1,14 @@
-import { Pool } from 'pg';
-import { migrate } from 'drizzle-orm/node-postgres/migrator';
-import { NodePgDatabase, drizzle } from 'drizzle-orm/node-postgres';
+import { drizzle } from "drizzle-orm/postgres-js";
+import { migrate } from "drizzle-orm/postgres-js/migrator";
+import postgres from "postgres";
+const sql = postgres("...", { max: 1 })
+const db = drizzle(sql);
 
-async function main() {
-  const pool = new Pool({ connectionString: process.env.DB_URL });
-  const db: NodePgDatabase = drizzle(pool);
-  
-  console.log('[migrate] Running migrations ...');
-  
-  await migrate(db, { migrationsFolder: 'src/db/drizzle' });
-  
-  console.log('[migrate] All migrations have been ran, exiting ...');
-  
-  await pool.end();
+
+const runMigrate =async ()=>
+{
+  await migrate(db, { migrationsFolder: "drizzle" });
+  await sql.end();
 }
 
-main();
+runMigrate();
