@@ -1,6 +1,6 @@
 import { relations } from 'drizzle-orm';
 import { InferInsertModel, InferSelectModel } from 'drizzle-orm';
-import { pgTable, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
+import {integer, pgTable, text, timestamp, uuid, varchar, boolean} from 'drizzle-orm/pg-core';
 import { createInsertSchema } from 'drizzle-zod';
 
 export const exercise = pgTable('exercises', {
@@ -26,6 +26,12 @@ export const users = pgTable('users', {
   email: varchar('email').notNull().unique(),
   type: varchar('type', { length: 56 }).default('strength'),
   difficulty: varchar('difficulty', { length: 56 }).default('beginner')
+});
+
+export const todo = pgTable("todo", {
+  id: integer("id").primaryKey(),
+  text: text("text").notNull(),
+  done: boolean("done").default(false).notNull(),
 });
 
 export const insertUserSchema = createInsertSchema(users);
